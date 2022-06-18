@@ -1,6 +1,7 @@
 package ru.kpfu.itis.service;
 
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.models.*;
 
@@ -12,8 +13,17 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class QuestionsService {
 
+    @Value("${custom.absolute.tf}")
+    private String tfPath;
+
+    @Value("${custom.absolute.single}")
+    private String singlePath;
+
+    @Value("${custom.absolute.multi}")
+    private String multiPath;
+
     public List<TFQuestion> getTFQuestions() {
-        String fileName = "/Users/mac/Desktop/Networks/src/main/resources/HuaweiTrueFalse.csv";
+        String fileName = tfPath;
         List<TFQuestion> beans = null;
         List<TFQuestion> randomised = new ArrayList<>();
         try {
@@ -37,7 +47,7 @@ public class QuestionsService {
 
     public List<SingleQuestion> getSingleQuestions(){
 
-        String fileName = "/Users/mac/Desktop/Networks/src/main/resources/HuaweiSingle.csv";
+        String fileName = singlePath;
         List<SingleRaw> beans = null;
         List<SingleQuestion> randomised = new ArrayList<>();
         try {
@@ -78,7 +88,7 @@ public class QuestionsService {
 
     public List<MultiQuestion> getMultiQuestions(){
 
-        String fileName = "/Users/mac/Desktop/Networks/src/main/resources/HuaweiMultiple.csv";
+        String fileName = multiPath;
         List<MultiRaw> beans = null;
         List<MultiQuestion> randomised = new ArrayList<>();
         try {
